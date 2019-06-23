@@ -1,5 +1,6 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+const passport = require("passport");
 
 const initDb = require("./src/services/initializeDatabase");
 const users = require("./src/routes/users/user");
