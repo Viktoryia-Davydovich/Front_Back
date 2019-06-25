@@ -8,7 +8,7 @@ require("../../src/middlewares/passport")(passport);
 module.exports = function initApi() {
   const app = express();
 
-  app.options("/", function(req, res) {
+  app.options("/register", function(req, res) {
     res.setHeader("Access-Control-Allow-Origin", "*");
     res.setHeader("Access-Control-Allow-Methods", "*");
     res.setHeader("Access-Control-Allow-Headers", "*");
