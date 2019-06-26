@@ -18,7 +18,7 @@ module.exports = function initDb() {
 
 const MongoClient = require("mongodb").MongoClient;
 const uri =
-  "mongodb+srv://admin:8025022@cluster0-v76vh.mongodb.net/test?retryWrites=true&w=majority";
+  "mongodb://admin:8025022@cluster0-shard-00-00-v76vh.mongodb.net:27017,cluster0-shard-00-01-v76vh.mongodb.net:27017,cluster0-shard-00-02-v76vh.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true&w=majority;";
 
 module.exports = function initDb() {
   MongoClient.connect(uri, { useNewUrlParser: true }, (err, client) => {
