@@ -21,6 +21,10 @@ module.exports = function initDb() {
     "mongodb+srv://admin:8025022@cluster0-v76vh.mongodb.net/test?retryWrites=true&w=majority";
   const client = new MongoClient(uri, { useNewUrlParser: true });
   client.connect(err => {
+    if (err) {
+      console.log(err.message, err.stack);
+      return;
+    }
     const collection = client.db("test").collection("devices");
     // perform actions on the collection object
     client.close();
