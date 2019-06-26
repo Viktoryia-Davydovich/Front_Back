@@ -8,6 +8,7 @@ const validateRegisterInput = require("../../validators/register");
 const validateLoginInput = require("../../validators/login");
 const User = require("../../models/User");
 const wrap = require("../../middlewares/wrap");
+const async = require("async");
 
 router.post(
   "/register",
