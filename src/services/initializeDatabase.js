@@ -25,6 +25,7 @@ module.exports = function initDb() {
   client.connect(err => {
     const collection = client.db("test").collection("devices");
     // perform actions on the collection object
+    console.log("running db");
     client.close();
   });
 };
