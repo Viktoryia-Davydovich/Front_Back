@@ -9,8 +9,12 @@ require("../../src/middlewares/passport")(passport);
 module.exports = function initApi() {
   const app = express();
 
-  app.use(cors());
+  app.use(passport.initialize());
+  app.use(bodyParser.urlencoded({ extended: false }));
+  app.use(bodyParser.json());
 
+  app.use(cors());
+  /*
   app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Credentials", true);
@@ -21,10 +25,7 @@ module.exports = function initApi() {
     );
     next();
   });
-
-  app.use(passport.initialize());
-  app.use(bodyParser.urlencoded({ extended: false }));
-  app.use(bodyParser.json());
+*/
   app.use("/api/users", users);
 
   app.get("/", function(req, res) {
