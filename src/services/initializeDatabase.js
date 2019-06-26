@@ -1,7 +1,8 @@
 const mongoose = require("mongoose");
-
+/*
 const config = {
-  DB: "mongodb://localhost:27017/auth"
+  DB:
+    "mongodb+srv://admin:<password>@cluster0-v76vh.mongodb.net/test?retryWrites=true&w=majority"
 };
 
 module.exports = function initDb() {
@@ -13,4 +14,17 @@ module.exports = function initDb() {
       console.log("Can not connect to the database" + err);
     }
   );
+};
+
+*/
+module.exports = function initDb() {
+  const MongoClient = require("mongodb").MongoClient;
+  const uri =
+    "mongodb+srv://admin:8025022@cluster0-v76vh.mongodb.net/test?retryWrites=true&w=majority";
+  const client = new MongoClient(uri, { useNewUrlParser: true });
+  client.connect(err => {
+    const collection = client.db("test").collection("devices");
+    // perform actions on the collection object
+    client.close();
+  });
 };
