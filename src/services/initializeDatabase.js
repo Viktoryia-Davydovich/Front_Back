@@ -15,7 +15,7 @@ module.exports = function initDb() {
   );
 };
 */
-modeule.exports = function initDb() {
+module.exports = function initDb() {
   const MongoClient = require("mongodb").MongoClient;
   const uri =
     "mongodb+srv://admin:8025022@cluster0-v76vh.mongodb.net/test?retryWrites=true&w=majority";
