@@ -34,7 +34,7 @@ module.exports = function initApi() {
   });
 
   app.get("/", cors(), function(req, res) {
-    res.send("up and running");
+    res.send("running");
   });
 
   const PORT = process.env.PORT || 5000;
