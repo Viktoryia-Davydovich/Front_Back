@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+// const mongoose = require("mongoose");
 /*
 const config = {
   DB: "mongodb://localhost:27017/auth"
@@ -15,17 +15,19 @@ module.exports = function initDb() {
   );
 };
 */
+
+const MongoClient = require("mongodb").MongoClient;
+const uri =
+  "mongodb+srv://admin:8025022@cluster0-v76vh.mongodb.net/test?retryWrites=true&w=majority";
+
 module.exports = function initDb() {
-  const MongoClient = require("mongodb").MongoClient;
-  const uri =
-    "mongodb+srv://admin:8025022@cluster0-v76vh.mongodb.net/test?retryWrites=true&w=majority";
-  const client = new MongoClient(uri, { useNewUrlParser: true });
-  client.connect(err => {
+  MongoClient.connect(uri, (err, client) => {
     if (err) {
-      console.log(err.message, err.stack);
+      console.log("Error connection to MongoDB", err.message, err.stack);
       return;
     }
-    const collection = client.db("test").collection("devices");
+    console.log("Success connection to MongoDB");
+    // const collection = client.db("test").collection("devices");
     // perform actions on the collection object
     client.close();
   });
