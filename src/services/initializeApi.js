@@ -3,11 +3,10 @@ const bodyParser = require("body-parser");
 const passport = require("passport");
 var cors = require("cors");
 
-const users = require("../../src/routes/users/user");
-require("../../src/middlewares/passport")(passport);
-
 module.exports = function initApi() {
   const app = express();
+
+  app.use(cors());
 
   app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
@@ -23,9 +22,6 @@ module.exports = function initApi() {
   app.use(bodyParser.json());
 
   /*
-  app.use(cors());
-
-
   app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Credentials", true);
@@ -37,13 +33,16 @@ module.exports = function initApi() {
     next();
   });
 */
+
+  const users = require("../../src/routes/users/user");
+
   app.use("/api/users", users);
 
   app.get("/", function(req, res, next) {
     res.send("running");
   });
 
-  app.post("/", function(req, res, next) {
+  app.post("*", function(req, res, next) {
     console.log("cors post");
   });
 
@@ -53,3 +52,5 @@ module.exports = function initApi() {
     console.log(`Server is running on PORT ${PORT}`);
   });
 };
+
+require("../../src/middlewares/passport")(passport);
