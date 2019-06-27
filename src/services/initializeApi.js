@@ -4,6 +4,7 @@ const passport = require("passport");
 var cors = require("cors");
 
 require("../../src/middlewares/passport")(passport);
+const users = require("../../src/routes/users/user");
 
 module.exports = function initApi() {
   const app = express();
@@ -31,8 +32,6 @@ module.exports = function initApi() {
     next();
   });
 */
-
-  const users = require("../../src/routes/users/user");
 
   app.use(passport.initialize());
   app.use(bodyParser.urlencoded({ extended: false }));
