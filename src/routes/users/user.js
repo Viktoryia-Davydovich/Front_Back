@@ -7,12 +7,9 @@ const passport = require("passport");
 const validateRegisterInput = require("../../validators/register");
 const validateLoginInput = require("../../validators/login");
 const User = require("../../models/User");
-const wrap = require("../../middlewares/wrap");
-const async = require("async");
 
 router.post(
-  "/register",
-  wrap(async function(req, res) {
+  "/register", function(req, res) {
     const { errors, isValid } = validateRegisterInput(req.body);
 
     if (!isValid) {
@@ -49,12 +46,10 @@ router.post(
         });
       }
     });
-  })
-);
+  });
 
 router.post(
-  "/login",
-  wrap(async (req, res) => {
+  "/login", (req, res) => {
     debugger;
     const { errors, isValid } = validateLoginInput(req.body);
 
@@ -97,8 +92,7 @@ router.post(
         }
       });
     });
-  })
-);
+  });
 
 router.get(
   "/me",
