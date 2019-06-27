@@ -3,13 +3,12 @@ const router = express.Router();
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const passport = require("passport");
-const cors = require("cors");
 
 const validateRegisterInput = require("../../validators/register");
 const validateLoginInput = require("../../validators/login");
 const User = require("../../models/User");
 
-router.post("/register", cors(), function(req, res) {
+router.post("/register", function(req, res) {
   const { errors, isValid } = validateRegisterInput(req.body);
 
   if (!isValid) {
@@ -48,7 +47,7 @@ router.post("/register", cors(), function(req, res) {
   });
 });
 
-router.post("/login", cors(), (req, res) => {
+router.post("/login", (req, res) => {
   debugger;
   const { errors, isValid } = validateLoginInput(req.body);
 
