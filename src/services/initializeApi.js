@@ -12,9 +12,10 @@ module.exports = function initApi() {
   app.use(passport.initialize());
   app.use(bodyParser.urlencoded({ extended: false }));
   app.use(bodyParser.json());
-  /*
+
   app.use(cors());
-  app.options("*", cors());*/
+  /*
+  app.options("*", cors());
 
   app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
@@ -26,14 +27,14 @@ module.exports = function initApi() {
     );
     next();
   });
-
+*/
   app.use("/api/users", users);
-
+  /*
   app.head("*", cors(), (req, res) => {
     res.sendStatus(204);
   });
-
-  app.get("/", cors(), function(req, res) {
+*/
+  app.get("/", function(req, res) {
     res.send("running");
   });
 

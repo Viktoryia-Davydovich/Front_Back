@@ -3,10 +3,13 @@ const router = express.Router();
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const passport = require("passport");
+const cors = require("cors");
 
 const validateRegisterInput = require("../../validators/register");
 const validateLoginInput = require("../../validators/login");
 const User = require("../../models/User");
+
+router.use(cors());
 
 router.post("/register", function(req, res) {
   const { errors, isValid } = validateRegisterInput(req.body);
