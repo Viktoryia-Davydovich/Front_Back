@@ -3,6 +3,8 @@ const bodyParser = require("body-parser");
 const passport = require("passport");
 var cors = require("cors");
 
+require("../../src/middlewares/passport")(passport);
+
 module.exports = function initApi() {
   const app = express();
 
@@ -16,10 +18,6 @@ module.exports = function initApi() {
     );
     next();
   });
-
-  app.use(passport.initialize());
-  app.use(bodyParser.urlencoded({ extended: false }));
-  app.use(bodyParser.json());
 
   /*
   app.use(function(req, res, next) {
@@ -35,6 +33,10 @@ module.exports = function initApi() {
 */
 
   const users = require("../../src/routes/users/user");
+
+  app.use(passport.initialize());
+  app.use(bodyParser.urlencoded({ extended: false }));
+  app.use(bodyParser.json());
 
   app.use("/api/users", users);
 
@@ -52,5 +54,3 @@ module.exports = function initApi() {
     console.log(`Server is running on PORT ${PORT}`);
   });
 };
-
-require("../../src/middlewares/passport")(passport);
