@@ -18,7 +18,6 @@ router.post("/register", function(req, res) {
   User.findOne({
     email: req.body.email
   }).then(user => {
-    debugger;
     if (user) {
       return res.status(400).json({
         email: "Email already exists"
@@ -48,7 +47,6 @@ router.post("/register", function(req, res) {
 });
 
 router.post("/login", (req, res) => {
-  debugger;
   const { errors, isValid } = validateLoginInput(req.body);
 
   if (!isValid) {
