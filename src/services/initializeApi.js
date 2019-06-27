@@ -29,13 +29,17 @@ module.exports = function initApi() {
   });
 */
   app.use("/api/users", users);
-  /*
+
   app.head("*", cors(), (req, res) => {
     res.sendStatus(204);
   });
-*/
-  app.get("/", function(req, res) {
+
+  app.get("/", cors(), function(req, res) {
     res.send("running");
+  });
+
+  app.post("*", cors(), function(req, res) {
+    console.log("cors works for post");
   });
 
   const PORT = process.env.PORT || 5000;
