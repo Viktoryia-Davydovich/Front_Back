@@ -12,7 +12,7 @@ router.post("/register", function(req, res) {
   const { errors, isValid } = validateRegisterInput(req.body);
 
   if (!isValid) {
-    return res.json(errors);
+    return res.status(400).json(errors);
   }
 
   User.findOne({
