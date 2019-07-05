@@ -7,9 +7,9 @@ const Note = require("../../models/Note");
 router.post("/add", async (request, response) => {
   try {
     const newNote = new Note({
-      title: req.body.title,
-      content: req.body.content,
-      tag: req.body.tag,
+      title: request.body.title,
+      content: request.body.content,
+      tag: request.body.tag,
       createdDate: new Date(),
       updatedDate: new Date()
     });
