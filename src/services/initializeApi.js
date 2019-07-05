@@ -4,6 +4,7 @@ const passport = require("passport");
 var cors = require("cors");
 
 const users = require("../../src/routes/users/user");
+const notes = require("../../src/routes/notes/note");
 require("../../src/middlewares/passport")(passport);
 
 module.exports = function initApi() {
@@ -16,6 +17,7 @@ module.exports = function initApi() {
   app.use(bodyParser.json());
 
   app.use("/api/users", users);
+  app.use("/api/notes", notes);
 
   app.get("/", function(req, res, next) {
     res.send("running");

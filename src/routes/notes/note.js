@@ -24,7 +24,6 @@ router.post("/notes", async (request, response) => {
 router.get("/notes", async (request, response) => {
   try {
     const notes = await Note.find({});
-
     response.send(
       notes.map(note => {
         note.title, note.content, note.tag, note.createdDate, note.updatedDate;
