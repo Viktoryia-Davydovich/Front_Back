@@ -4,7 +4,7 @@ const async = require("async");
 
 const Note = require("../../models/Note");
 
-router.post("/notes", async (request, response) => {
+router.post("/add", async (request, response) => {
   try {
     const newNote = new Note({
       title: req.body.title,
@@ -22,7 +22,7 @@ router.post("/notes", async (request, response) => {
   }
 });
 
-router.get("/notes", async (request, response) => {
+router.get("/", async (request, response) => {
   try {
     const notes = await Note.find({});
     response.send(
@@ -36,7 +36,7 @@ router.get("/notes", async (request, response) => {
   }
 });
 
-router.get("/notes/:id", async (request, response) => {
+router.get("/:id", async (request, response) => {
   try {
     const { id } = request.params;
     if (!id) {
@@ -51,7 +51,7 @@ router.get("/notes/:id", async (request, response) => {
   }
 });
 
-router.put("/notes", async (request, response) => {
+router.put("/", async (request, response) => {
   try {
     const editedNote = request.body.note;
     const updatedNote = await Note.update(
@@ -72,7 +72,7 @@ router.put("/notes", async (request, response) => {
   }
 });
 
-router.delete("/notes/:id", async (request, response) => {
+router.delete("/:id", async (request, response) => {
   try {
     const { id } = request.params;
     const deletedNote = await Note.findOneAndRemove(id);
