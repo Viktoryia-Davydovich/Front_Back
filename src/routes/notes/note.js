@@ -71,12 +71,12 @@ router.put("/notes", async (request, response) => {
   }
 });
 
-router.delete("/notes/:id", (request, response) => {
+router.delete("/notes/:id", async (request, response) => {
   try {
     const { id } = request.params;
     const deletedNote = await Note.findOneAndRemove(id);
     if (deletedNote) {
-      res.status(204).send('Note successfully deleted');
+      res.status(204).send("Note successfully deleted");
     }
   } catch (error) {
     console.log("err" + error);
