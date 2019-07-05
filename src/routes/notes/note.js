@@ -1,6 +1,24 @@
 const router = express.Router();
-const NoteManager = require("../Services/NoteManager");
-const noteManager = new NoteManager();
+const async = require("async");
+
+const Note = require("../../models/Note");
+
+router.post("/notes", async (request, response) => {
+  try {
+    const newNote = new Note({
+      title: req.body.title,
+      content: req.body.content,
+      tag: req.body.tag,
+      createdDate: new Date(),
+      updatedDate: new Date()
+    });
+
+    const saveNote = await newNote.save();
+  } catch (err) {
+    console.log("err" + err);
+    res.status(400).send(err);
+  }
+});
 
 router.delete("/notes/:id", (request, response) => {
   const { id } = request.params;
@@ -61,24 +79,7 @@ router.get("/notes", (request, response) => {
       });
   }
 });
-router.post("/notes", (request, response) => {
-  console.log(request.body);
-  const { title, content, tag } = request.body;
 
-  if (!title) {
-    response.status(400).send("Title is required");
-  } else if (!content) {
-    response.status(400).send("Content is required");
-  } else {
-    noteManager
-      .addNote(title, content, tag)
-      .then(id => response.status(201).send({ id: id }))
-      .catch(error => {
-        console.log(error.message);
-        response.status(500).send(error.message);
-      });
-  }
-});
 router.put("/notes", (request, response) => {
   const { id, title, content, tag } = request.body.note;
 
