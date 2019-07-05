@@ -15,9 +15,9 @@ router.post("/notes", async (request, response) => {
 
     const saveNote = await newNote.save();
     response.json(saveNote);
-  } catch (err) {
-    console.log("err" + err);
-    res.status(500).send(err);
+  } catch (error) {
+    console.log("err" + error);
+    response.status(500).send(error);
   }
 });
 
@@ -31,8 +31,8 @@ router.get("/notes", async (request, response) => {
       })
     );
   } catch (error) {
-    console.log("err" + err);
-    res.status(500).send(err);
+    console.log("err" + error);
+    response.status(500).send(error);
   }
 });
 
@@ -46,35 +46,42 @@ router.get("/notes/:id", async (request, response) => {
       response.send(theNote);
     }
   } catch (error) {
-    console.log("err" + err);
-    res.status(500).send(err);
+    console.log("err" + error);
+    response.status(500).send(error);
   }
 });
 
 router.put("/notes", async (request, response) => {
-  const { id, title, content, tag } = request.body.note;
-  noteManager
-    .updateNote(id, title, content, tag)
-    .then(() => response.status(200).send())
-    .catch(error => {
-      console.log(error.message);
-      response.status(500).send(error.message);
-    });
+  try {
+    const editedNote = request.body.note;
+    const updatedNote = await Note.update(
+      { id: editedNote.id },
+      {
+        $set: {
+          title: editedNote.title,
+          content: editedNote.content,
+          tags: editedNote.tag,
+          updatedDate: editedNote.updatedDate
+        }
+      }
+    );
+    response.send(updatedNote);
+  } catch (error) {
+    console.log("err" + error);
+    response.status(500).send(error);
+  }
 });
 
 router.delete("/notes/:id", (request, response) => {
-  const { id } = request.params;
-
-  if (!id) {
-    response.status(400).send("Title is required");
-  } else {
-    noteManager
-      .removeNote(id)
-      .then(() => response.status(200).send("Note deleted"))
-      .catch(error => {
-        console.log(error.message);
-        response.status(500).send();
-      });
+  try {
+    const { id } = request.params;
+    const deletedNote = await Note.findOneAndRemove(id);
+    if (deletedNote) {
+      res.status(204).send('Note successfully deleted');
+    }
+  } catch (error) {
+    console.log("err" + error);
+    response.status(500).send(error);
   }
 });
 
