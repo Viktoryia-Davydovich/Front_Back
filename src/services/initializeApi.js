@@ -3,8 +3,8 @@ const bodyParser = require("body-parser");
 const passport = require("passport");
 var cors = require("cors");
 
-const users = require("../../src/routes/users/user");
-const notes = require("../../src/routes/notes/note");
+const users = require("../routes/user");
+const notes = require("../routes/note");
 require("../../src/middlewares/passport")(passport);
 
 module.exports = function initApi() {

@@ -5,9 +5,9 @@ const jwt = require("jsonwebtoken");
 const passport = require("passport");
 const async = require("async");
 
-const validateRegisterInput = require("../../validators/register");
-const validateLoginInput = require("../../validators/login");
-const User = require("../../models/User");
+const validateRegisterInput = require("../validators/register");
+const validateLoginInput = require("../validators/login");
+const User = require("../models/User");
 
 router.post("/register", async (req, res) => {
   const { errors, isValid } = validateRegisterInput(req.body);
