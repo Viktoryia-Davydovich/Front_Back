@@ -10,6 +10,7 @@ router.post("/add", async (request, response) => {
       title: request.body.title,
       content: request.body.content,
       tag: request.body.tag,
+      user: request.body.user,
       createdDate: new Date(),
       updatedDate: new Date()
     });
