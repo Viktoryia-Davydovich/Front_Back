@@ -49,12 +49,8 @@ router.get("/", async (request, response) => {
 router.get("/:id", async (request, response) => {
   try {
     const { id } = request.params;
-    if (!id) {
-      response.status(400).send("Id is required");
-    } else {
-      theNote = await Note.findOne(id);
-      response.json(theNote);
-    }
+    theNote = await Note.findOne(id);
+    response.json(theNote);
   } catch (error) {
     console.log("err" + error);
     response.status(500).send(error);
