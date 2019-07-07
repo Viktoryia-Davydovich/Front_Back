@@ -25,10 +25,20 @@ router.post("/add", async (request, response) => {
 router.get("/", async (request, response) => {
   try {
     const notes = await Note.find({});
-    response.send(
+    console.log(notes);
+    response.json(
+      /*
       notes.map(note => {
-        note.title, note.content, note.tag, note.createdDate, note.updatedDate;
-      })
+        return {
+          _id: note._id,
+          title: note.title,
+          content: note.content,
+          tag: note.tags,
+          createdDate: note.created_date,
+          updatedDate: note.updated_date
+        };
+      })*/
+      notes
     );
   } catch (error) {
     console.log("err" + error);
@@ -65,7 +75,7 @@ router.put("/", async (request, response) => {
         }
       }
     );
-    response.send(updatedNote);
+    response.json(updatedNote);
   } catch (error) {
     console.log("err" + error);
     response.status(500).send(error);
@@ -77,7 +87,7 @@ router.delete("/:id", async (request, response) => {
     const { id } = request.params;
     const deletedNote = await Note.findOneAndRemove(id);
     if (deletedNote) {
-      res.status(204).send("Note successfully deleted");
+      response.status(204).send("Note successfully deleted");
     }
   } catch (error) {
     console.log("err" + error);
