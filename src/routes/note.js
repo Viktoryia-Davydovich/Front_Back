@@ -26,20 +26,7 @@ router.get("/", async (request, response) => {
   try {
     const notes = await Note.find({});
     console.log(notes);
-    response.json(
-      /*
-      notes.map(note => {
-        return {
-          _id: note._id,
-          title: note.title,
-          content: note.content,
-          tag: note.tags,
-          createdDate: note.created_date,
-          updatedDate: note.updated_date
-        };
-      })*/
-      notes
-    );
+    response.json(notes);
   } catch (error) {
     console.log("err" + error);
     response.status(500).send(error);
@@ -49,7 +36,7 @@ router.get("/", async (request, response) => {
 router.get("/:id", async (request, response) => {
   try {
     const { id } = request.params;
-    theNote = await Note.findById(id);
+    theNote = await Note.findById({ _id: id });
     if (theNote) {
       response.status(204).send("Note found");
     }
