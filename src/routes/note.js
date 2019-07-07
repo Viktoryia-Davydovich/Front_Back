@@ -47,17 +47,15 @@ router.get("/:id", async (request, response) => {
 router.put("/", async (request, response) => {
   try {
     const editedNote = request.body.note;
-    const updatedNote = await Note.update(
-      { _id: editedNote._id },
-      {
-        $set: {
-          title: editedNote.title,
-          content: editedNote.content,
-          tag: editedNote.tag,
-          updatedDate: editedNote.updatedDate
-        }
+    theNote = await Note.findOne({ _id: id });
+    const updatedNote = await theNote.update({
+      $set: {
+        title: editedNote.title,
+        content: editedNote.content,
+        tag: editedNote.tag,
+        updatedDate: editedNote.updatedDate
       }
-    );
+    });
     response.json(updatedNote);
   } catch (error) {
     console.log("err" + error);
