@@ -36,7 +36,7 @@ router.get("/", async (request, response) => {
 router.get("/:id", async (request, response) => {
   try {
     const { id } = request.params;
-    theNote = await Note.find({ _id: id });
+    theNote = await Note.findOne({ _id: id });
     response.json(theNote);
   } catch (error) {
     console.log("err" + error);
