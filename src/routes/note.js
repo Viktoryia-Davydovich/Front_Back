@@ -47,14 +47,17 @@ router.get("/", async (request, response) => {
 });
 
 router.get("/:id", async (request, response) => {
+  const { id } = request.params;
+  theNote = await Note.findOne(id);
+  response.json(theNote);
+  /*
   try {
-    const { id } = request.params;
-    theNote = await Note.findOne(id);
-    response.json(theNote);
+
   } catch (error) {
     console.log("err" + error);
     response.status(500).send(error);
   }
+  */
 });
 
 router.put("/", async (request, response) => {
