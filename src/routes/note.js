@@ -53,7 +53,7 @@ router.put("/", async (request, response) => {
         $set: {
           title: editedNote.title,
           content: editedNote.content,
-          tags: editedNote.tag,
+          tag: editedNote.tag,
           updatedDate: editedNote.updatedDate
         }
       }
