@@ -53,7 +53,7 @@ router.get("/:id", async (request, response) => {
       response.status(400).send("Id is required");
     } else {
       theNote = await Note.findOne(id);
-      response.send(theNote);
+      response.json(theNote);
     }
   } catch (error) {
     console.log("err" + error);
