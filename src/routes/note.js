@@ -35,7 +35,7 @@ router.get("/", async (request, response) => {
 
 router.get("/:id", async (request, response) => {
   try {
-    const id = new mongoose.Types.ObjectId(request.params);
+    const { id } = request.params;
     theNote = await Note.findById(id);
     if (theNote) {
       response.status(204).send("Note found");
