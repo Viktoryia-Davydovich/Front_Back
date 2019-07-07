@@ -48,7 +48,7 @@ router.put("/", async (request, response) => {
   try {
     const editedNote = request.body.note;
     const updatedNote = await Note.update(
-      { id: editedNote.id },
+      { _id: editedNote._id },
       {
         $set: {
           title: editedNote.title,
