@@ -68,7 +68,7 @@ router.put("/", async (request, response) => {
 router.delete("/:id", async (request, response) => {
   try {
     const { id } = request.params;
-    const deletedNote = await Note.findOneAndRemove(id);
+    const deletedNote = await Note.remove({ _id: ObjectId(id) });
     if (deletedNote) {
       response.status(204).send("Note successfully deleted");
     }
