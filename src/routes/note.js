@@ -36,10 +36,7 @@ router.get("/", async (request, response) => {
 router.get("/:id", async (request, response) => {
   try {
     const { id } = request.params;
-    theNote = await Note.findById(id);
-    if (theNote) {
-      response.status(204).send("Note found");
-    }
+    theNote = await Note.findOne(id);
     response.json(theNote);
   } catch (error) {
     console.log("err" + error);
