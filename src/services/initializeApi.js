@@ -12,6 +12,15 @@ module.exports = function initApi() {
 
   app.use(cors());
 
+  app.use(
+    session({
+      secret: "super secret key",
+      resave: true,
+      cookie: { maxAge: 60 * 60 * 1000 }, // 1  hr
+      saveUninitialized: true
+    })
+  );
+
   app.use(passport.initialize());
   app.use(bodyParser.urlencoded({ extended: false }));
   app.use(bodyParser.json());
