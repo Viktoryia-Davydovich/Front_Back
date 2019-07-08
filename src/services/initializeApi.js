@@ -12,19 +12,7 @@ module.exports = function initApi() {
   const app = express();
 
   app.use(cors());
-  /*
-  app.use(
-    session({
-      cookieName: "session",
-      secret: "secret",
-      duration: 30 * 60 * 1000,
-      activeDuration: 5 * 60 * 1000,
-      httpOnly: true,
-      secure: true,
-      ephemeral: true
-    })
-  );
-*/
+
   app.use(passport.initialize());
   app.use(bodyParser.urlencoded({ extended: false }));
   app.use(bodyParser.json());
