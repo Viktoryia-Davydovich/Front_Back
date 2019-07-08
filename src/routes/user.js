@@ -73,7 +73,7 @@ router.post("/login", async (req, res) => {
       payload,
       "secret",
       {
-        expiresIn: 3600
+        expiresIn: 30 * 60 * 1000
       },
       (err, token) => {
         if (err) console.error("There is some error in token", err);

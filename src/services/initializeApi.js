@@ -2,7 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const passport = require("passport");
 const cors = require("cors");
-const session = require("express-session");
+const session = require("client-sessions");
 
 const users = require("../routes/user");
 const notes = require("../routes/note");
@@ -12,16 +12,19 @@ module.exports = function initApi() {
   const app = express();
 
   app.use(cors());
-
+  /*
   app.use(
     session({
-      secret: "super secret key",
-      resave: true,
-      cookie: { maxAge: 60 * 60 * 1000 }, // 1  hr
-      saveUninitialized: true
+      cookieName: "session",
+      secret: "secret",
+      duration: 30 * 60 * 1000,
+      activeDuration: 5 * 60 * 1000,
+      httpOnly: true,
+      secure: true,
+      ephemeral: true
     })
   );
-
+*/
   app.use(passport.initialize());
   app.use(bodyParser.urlencoded({ extended: false }));
   app.use(bodyParser.json());
