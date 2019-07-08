@@ -91,15 +91,11 @@ router.post("/login", async (req, res) => {
   }
 });
 
-router.get(
-  "/me",
-  passport.authenticate("jwt", { session: true }),
-  (req, res) => {
-    return res.json({
-      id: req.user.id,
-      email: req.user.email
-    });
-  }
-);
+router.get("/", passport.authenticate("jwt", { session: true }), (req, res) => {
+  return res.json({
+    id: req.user.id,
+    email: req.user.email
+  });
+});
 
 module.exports = router;
