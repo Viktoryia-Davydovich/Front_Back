@@ -46,14 +46,6 @@ router.post("/register", async (req, res) => {
 });
 
 router.post("/login", async (req, res) => {
-  passport.authenticate("jwt", { session: true }),
-    (req, res) => {
-      return res.json({
-        id: req.user.id,
-        email: req.user.email
-      });
-    };
-
   const { errors, isValid } = validateLoginInput(req.body);
 
   if (!isValid) {
@@ -98,7 +90,7 @@ router.post("/login", async (req, res) => {
     return res.status(400).json(errors);
   }
 });
-/*
+
 router.get(
   "/me",
   passport.authenticate("jwt", { session: true }),
@@ -109,5 +101,5 @@ router.get(
     });
   }
 );
-*/
+
 module.exports = router;
