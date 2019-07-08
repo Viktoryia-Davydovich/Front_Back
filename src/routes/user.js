@@ -73,7 +73,7 @@ router.post("/login", async (req, res) => {
       payload,
       "secret",
       {
-        expiresIn: 60000
+        expiresIn: 600000
       },
       (err, token) => {
         if (err) console.error("There is some error in token", err);
@@ -93,7 +93,7 @@ router.post("/login", async (req, res) => {
 
 router.get(
   "/me",
-  passport.authenticate("jwt", { session: false }),
+  passport.authenticate("jwt", { session: true }),
   (req, res) => {
     return res.json({
       id: req.user.id,
